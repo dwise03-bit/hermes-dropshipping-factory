@@ -1,0 +1,38 @@
+{
+  "name": "hermes-dropshipping-factory",
+  "version": "1.0.0",
+  "description": "AI-powered autonomous dropshipping factory with Hermes manager orchestration",
+  "main": "agents/hermes-manager.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch agents/hermes-manager.js",
+    "start": "node agents/hermes-manager.js",
+    "research": "node agents/researcher.js",
+    "push": "node agents/pusher.js",
+    "pm2:start": "pm2 start pm2-config.json",
+    "pm2:stop": "pm2 stop all",
+    "pm2:restart": "pm2 restart all",
+    "pm2:logs": "pm2 logs",
+    "pm2:delete": "pm2 delete all",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dropshipping",
+    "ecommerce",
+    "automation",
+    "hermes",
+    "agents"
+  ],
+  "author": "Daniel Wise",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.5",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.2",
+    "axios": "^1.6.2",
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "pm2": "^5.3.0"
+  }
+}

@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  hermes:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hermes-dropshipping-factory
+    env_file: .env
+    volumes:
+      - ./logs:/app/logs
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - hermes-network
+    healthcheck:
+      test: ["CMD", "pm2", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: PostgreSQL database if not using Supabase cloud
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: hermes-postgres
+  #   environment:
+  #     POSTGRES_DB: hermes_db
+  #     POSTGRES_USER: hermes
+  #     POSTGRES_PASSWORD: change_me_in_production
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - hermes-network
+  #   restart: unless-stopped
+
+networks:
+  hermes-network:
+    driver: bridge
+
+# volumes:
+#   postgres_data:
